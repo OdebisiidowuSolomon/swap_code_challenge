@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swap Challenge</title>
+    <!-- <script src="app.js" defer></script> -->
+    <style>
+        span {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='root'></div>
+    <script>
+        const root = document.getElementById("root");
+        const spans = document.getElementsByTagName("span");
+
+        let wordSp = "The Quick Brown Fox jumps over the lazy dog".split(" ");
+
+        function setWords(index) {
+            root.innerText = "";
+            for (let i = 0; i < wordSp.length; i++) {
+                let span = document.createElement("span");
+                span.innerText = `${wordSp[i]} `;
+
+                span.onclick = () => clickWord(span);
+                text = () => clickWord(span);
+                root.appendChild(span);
+            }
+            spans[index === "0s" ? 0 : index + 1].style.color = "red";
+        }
+
+        setWords();
+
+        function clickWord(span) {
+            index = Array.from(spans).findIndex(
+                (word) => word.innerText.trim() === span.innerText.trim()
+            );
+            if (index < wordSp.length - 1) {
+                temp = wordSp[index];
+                wordSp[index] = wordSp[index + 1];
+                wordSp[index + 1] = temp;
+                setWords(index);
+            } else {
+                temp = wordSp[index];
+                wordSp[index] = wordSp[0];
+                wordSp[0] = temp;
+                setWords("0s");
+            }
+        }
+
+    </script>
+</body>
+
+</html>
